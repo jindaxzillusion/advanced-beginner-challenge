@@ -1,10 +1,11 @@
 from collections import deque
 
+
 class TreeNode:
     def __init__(self, val):
         self.val = val
         self.left, self.right = None, None
-    
+
     def traverse(root):
         result = []
         if not root:
@@ -24,3 +25,7 @@ class TreeNode:
                     queue.append(currentNode.right)
             result.append(currentLevel)
         return result
+
+"""
+
+"""
