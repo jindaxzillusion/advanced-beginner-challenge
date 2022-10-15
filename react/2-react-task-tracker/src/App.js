@@ -2,10 +2,13 @@
 import logo from './logo.svg';
 // styling
 // import './App.css';
+import {BrowserRouter as Router, Route} from "react-router-dom"
 import Header from './components/Header'
 import React from 'react'
 import Tasks from './components/Tasks';
 import AddTask from './components/AddTask';
+import Footer from './components/Footer';
+import About from './components/About';
 import { useState, useEffect } from 'react'
 
 // component can be class or function
@@ -83,19 +86,24 @@ function App() {
   
   // return jsx
   return (
+    <Router>
     // use className instead of class
     // return a single element
     <div className="container">
       <Header onAdd={() => setShowAddTask(!showAddTask)} 
               showAdd={showAddTask}/>
-      {showAddTask && <AddTask onAdd={addTask}/>}
-      {tasks.length > 0 ? <Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}/> : 'No tasks'}
-
-      {/* <h1>Hello from React</h1>
-      <h2>Hello {name}</h2>
-      <h2>Hello {1+1}</h2>
-      <h2>Hello {x ? 'Yes' : 'No'}</h2> */}
+      
+      <Route path='/' exact render={(props) => (
+        <>
+          {showAddTask && <AddTask onAdd={addTask}/>}
+          {tasks.length > 0 ? (<Tasks tasks={tasks} onDelete={deleteTask} onToggle={toggleReminder}/>) : 'No tasks'}  
+        </>
+      ) } />
+      
+      <Route path="/about" component={About}/>
+      <Footer />
     </div>
+    </Router>
   );
 }
 
